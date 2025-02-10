@@ -25,7 +25,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: https://mtwalli.github.io/site/
+      url: https://pages.github.com/mtwalli/site
       
     steps:
       - name: Checkout Repository
