@@ -1,13 +1,10 @@
 site_name: Mohamed Metwalli
-nav:
-  - Home: index.md
-  - About: about.md
-  - Experience: experience.md
-  - Skills: skills.md
-  - Education: education.md
-  - Contact: contact.md
+
 
 theme:
+  font:
+    text: Noto Sans Display
+    code: Noto Sans Mono
   name: material
   palette:
     # Palette toggle for automatic mode
@@ -33,10 +30,22 @@ theme:
         name: Switch to system preference
 
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - toc:
       permalink: true
   - pymdownx.highlight
   - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji # (1)!
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra:
   social:
@@ -44,3 +53,6 @@ extra:
       link: https://www.linkedin.com/in/metwalli
     - icon: fontawesome/brands/github
       link: https://github.com/mtwalli
+
+extra_css:
+  - stylesheets/extra.css
