@@ -1,0 +1,27 @@
+site_name: Mohamed Metwalli
+nav:
+  - Home: index.md
+  - About: about.md
+  - Experience: experience.md
+  - Skills: skills.md
+  - Education: education.md
+  - Contact: contact.md
+
+theme:
+  name: material
+  palette:
+    primary: blue
+    accent: light blue
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+extra:
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/mohamedmetwalli
+    - icon: fontawesome/brands/github
+      link: https://github.com/mohamedmetwalli
