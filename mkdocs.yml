@@ -10,7 +10,7 @@ nav:
 theme:
   name: material
   palette:
-    primary: blue
+    primary: black
     accent: light blue
 
 markdown_extensions:
@@ -22,6 +22,6 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/mohamedmetwalli
+      link: https://www.linkedin.com/in/metwalli
     - icon: fontawesome/brands/github
-      link: https://github.com/mohamedmetwalli
+      link: https://github.com/mtwalli
