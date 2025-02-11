@@ -28,8 +28,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-  
-  logo: material/shield-home
+  icon:
+   logo: simple/minds
 
 markdown_extensions:
   - attr_list
