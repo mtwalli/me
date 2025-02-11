@@ -26,7 +26,7 @@ jobs:
     environment:
       name: github-pages
       url: https://mtwalli.github.io/site
-      
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
@@ -35,7 +35,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      
+
       - name: Set up Python runtime
         uses: actions/setup-python@v5
         with:
@@ -57,7 +57,7 @@ jobs:
         run: |
           mkdocs build --clean
           mkdocs --version
-      
+
       - name: Upload Site to GitHub Pages
         id: upload_pages
         uses: actions/upload-pages-artifact@v3.0.1

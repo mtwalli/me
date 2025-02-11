@@ -87,7 +87,7 @@
   width: 0;
   z-index: 1;
   left: 30px;
-  border: medium solid var(--primary-color);
+
   border-width: 10px 10px 10px 0;
   border-color: transparent var(--primary-color) transparent transparent;
 }
@@ -142,47 +142,62 @@
   .right {
   left: 0%;
   }
-}
+
+.centered-text {
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            text-align: center;
+        }
 </style>
 </head>
 <body>
-
+<div class="centered-text">
+    <h3>Germany 🇩🇪</h3>
+</div>
+<hr>
 <div class="timeline">
   <div class="container left">
     <div class="content">
-      <h2><img src="https://www.sap.com/aemedge/icons/sap-logo.svg" class="image">SAP</h2>
+      <h2><img src="https://www.sap.com/aemedge/icons/sap-logo.svg" class="image" alt="SAP">SAP</h2>
       <h6>DEC 2020 – PRESENT</h6>
       <p>Development Architect</p>
     </div>
   </div>
   <div class="container right">
     <div class="content">
-     <h2><img src="https://www.eon.de/content/dam/eon/eon-de-zwei/svg-mein-eon/logo-eon-red.svg" class="image">E.ON</h2>
+     <h2><img src="https://www.eon.de/content/dam/eon/eon-de-zwei/svg-mein-eon/logo-eon-red.svg" class="image" alt="E.ON">E.ON</h2>
      <h6>JUL 2019 – NOV 2020</h6>
      <p>Android Tech Lead</p>
     </div>
   </div>
   <div class="container left">
     <div class="content">
-     <h2><img src="https://upload.wikimedia.org/wikipedia/de/thumb/7/74/Joyn_%28Streaminganbieter%29_logo.svg/1600px-Joyn_%28Streaminganbieter%29_logo.svg.png?20191126194036"class="image">Joyn</h2>
+     <h2><img src="https://upload.wikimedia.org/wikipedia/de/thumb/7/74/Joyn_%28Streaminganbieter%29_logo.svg/1600px-Joyn_%28Streaminganbieter%29_logo.svg.png?20191126194036" class="image" alt="Joyn">Joyn</h2>
       <h6>MAR 2019 – JUNE 2019</h6>
       <p>Senior Android Developer</p>
     </div>
   </div>
   <div class="container right">
     <div class="content">
-      <h2><img src="https://look.ams-osram.com/transform/2f3e8012-68d3-4dc2-8719-14e23820a091/Logo-rgb-without-bounding-box-orange-transparent-background?" class="image"/>OSRAM</h2>
+      <h2><img src="https://look.ams-osram.com/transform/2f3e8012-68d3-4dc2-8719-14e23820a091/Logo-rgb-without-bounding-box-orange-transparent-background?" class="image" alt="OSRAM"/>OSRAM</h2>
       <h6>MAR 2018 – FEB 2019</h6>
       <p>Senior Android Developer</p>
     </div>
   </div>
   <div class="container left">
     <div class="content">
-      <h2><img src="https://banner2.cleanpng.com/20180710/ory/aawpokoyj.webp" class="image"/>Westwing</h2>
+      <h2><img src="https://banner2.cleanpng.com/20180710/ory/aawpokoyj.webp" class="image" alt="Westwing"/>Westwing</h2>
       <h6>OCT 2014 – FEB 2018 </h6>
       <p>Senior Android Developer</p>
     </div>
   </div>
 </div>
+
+<div class="centered-text">
+    <h3>Egypt 🇪🇬</h3>
+</div>
+<hr>
+
 </body>
 </html>
