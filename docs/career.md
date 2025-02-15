@@ -1,16 +1,16 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width initial-scale=1.0">
 
 <style>
 
 :root {
-    --primary-color:rgb(225, 226, 234);
+    --primary-color: #e1e2ea;
 }
 
 /* Dark Mode */
 [data-md-color-scheme="slate"] {
-    --primary-color:#2f3344;
+    --primary-color: #2f3344;
 }
 
 /* The actual timeline (the vertical ruler) */
@@ -47,8 +47,8 @@
   width: 25px;
   height: 25px;
   right: -13px;
-  background-color: white;
-  border: 4px solid #FF9F55;
+  background-color:rgb(139, 191, 139);
+  border: 5px solid var(--primary-color);
   top: 15px;
   border-radius: 50%;
   z-index: 1;
@@ -145,17 +145,20 @@
 
 .centered-text {
             display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
+            justify-content: center;
+            align-items: center; 
             text-align: center;
-        }
+
+}
 </style>
 </head>
 <body>
+
 <div class="centered-text">
     <h3>Germany 🇩🇪</h3>
 </div>
-<hr>
+
+<hr >
 <div class="timeline">
   <div class="container left">
     <div class="content">
@@ -197,7 +200,28 @@
 <div class="centered-text">
     <h3>Egypt 🇪🇬</h3>
 </div>
+
 <hr>
+
+<div class="timeline">
+
+  <div class="container right">
+    <div class="content">
+     <h2><img src="https://media.licdn.com/dms/image/v2/C4E0BAQFoJpINoY_2pQ/company-logo_200_200/company-logo_200_200/0/1631341840369?e=1747872000&v=beta&t=CsFmCpv2T315p8Qni0ICyS0beknj6dJNiZcwUa5rImo" class="image" alt="NUITEX">NUITEX</h2>
+     <h6>JAN 2014 – SEP 2014</h6>
+     <p>Senior Android Developer</p>
+    </div>
+  </div>
+
+  <div class="container left">
+    <div class="content">
+      <h2><img src="https://asgatech.com/wp-content/uploads/2019/09/asgatech_logo0-01200.png" class="image" alt="ASGATECH">AsgaTech</h2>
+      <h6>OCT 2011 – DEC 2014 </h6>
+      <p>Android Developer</p>
+    </div>
+  </div>
+
+</div>
 
 </body>
 </html>
