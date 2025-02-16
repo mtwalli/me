@@ -25,7 +25,7 @@ jobs:
 
     environment:
       name: github-pages
-      url: https://mtwalli.github.io/site
+      url: ${{ steps.upload_pages.outputs.url }}
 
     steps:
       - name: Checkout Repository

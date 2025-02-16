@@ -1,10 +1,8 @@
 site_name: Mohamed Metwalli
-site_url: https://mtwalli.github.io/site
-
 theme:
   font:
-    text: Noto Sans Display
-    code: Noto Sans Mono
+    text: Noto Sans
+    code: JetBrains Mono
   name: material
   palette:
     # Palette toggle for automatic mode
