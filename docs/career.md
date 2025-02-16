@@ -177,7 +177,7 @@
   <div class="container left">
     <div class="content">
      <h2><img src="https://upload.wikimedia.org/wikipedia/de/thumb/7/74/Joyn_%28Streaminganbieter%29_logo.svg/1600px-Joyn_%28Streaminganbieter%29_logo.svg.png?20191126194036" class="image" alt="Joyn">Joyn</h2>
-      <h6>MAR 2019 – JUNE 2019</h6>
+      <h6>MAR 2019 – JUN 2019</h6>
       <p>Senior Android Developer</p>
     </div>
   </div>
