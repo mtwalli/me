@@ -50,6 +50,23 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - neoteroi.timeline
 
+plugins:
+  - search
+
+features:
+  - content.action.edit
+  - content.action.view
+  - content.code.annotate
+  - content.code.copy
+  - content.tooltips
+  - navigation.footer
+  - navigation.indexes
+  - navigation.sections
+  - navigation.tracking
+  - search.highlight
+  - search.suggest
+  - toc.follow
+
 extra:
   social:
     - icon: fontawesome/brands/linkedin
