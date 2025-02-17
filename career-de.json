@@ -1,0 +1,28 @@
+[
+    {
+        "title": "SAP",
+        "icon": ":simple-sap:",
+        "content": "Development Architect",
+        "sub_title": "DEC 2020 – PRESENT"
+    },
+    {
+        "title": "E.ON",
+        "content": "Android Tech Lead",
+        "sub_title": "JUL 2019 – NOV 2020"
+    },
+    {
+        "title": "Joyn",
+        "content": "Senior Android Developer",
+        "sub_title": "MAR 2019 – JUN 2019"
+    },
+    {
+        "title": "OSRAM",
+        "content": "Senior Android Developer",
+        "sub_title": "MAR 2018 – FEB 2019"
+    },
+    {
+        "title": "Westwing",
+        "content": "Senior Android Developer",
+        "sub_title": "OCT 2014 – FEB 2018"
+    }
+]
