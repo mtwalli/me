@@ -5,11 +5,11 @@
 **/
 :root {
   --nt-color-0: #CD853F;
-  --nt-color-1: #B22222;
-  --nt-color-2: #000080;
-  --nt-color-3: #4B0082;
-  --nt-color-4: #3CB371;
-  --nt-color-5: #D2B48C;
+  --nt-color-1: #006BB8;
+  --nt-color-2: #EA1C0A;
+  --nt-color-3: #000000;
+  --nt-color-4: #F0461C;
+  --nt-color-5: #9ac4b7;
   --nt-color-6: #FF00FF;
   --nt-color-7: #98FB98;
   --nt-color-8: #FFEBCD;
@@ -589,6 +589,8 @@
 }
 .nt-timeline .nt-timeline-sub-title {
   margin-top: 0;
+  font-size: large;
+  font-family:monospace
 }
 .nt-timeline .nt-timeline-content {
   font-size: 0.8rem;
