@@ -1,7 +1,7 @@
 site_name: Mohamed Metwalli
 theme:
   font:
-    text: Noto Sans
+    text: Roboto
     code: JetBrains Mono
   name: material
   palette:
@@ -13,7 +13,7 @@ theme:
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: black
+      primary: white
       accent: green
       scheme: default 
       toggle:
