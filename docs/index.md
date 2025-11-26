@@ -1,5 +1,5 @@
 # About Me
-![Image](./assets/image.png){ style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; border: 4px solid #6073ee;" }
+![Image](./assets/image.jpg){ style="border-radius: 50%; width: 200px; height: 200px; object-fit: cover; border: 4px solid #6073ee;" }
 
 [:material-phone:](tel:+4915223643969)  [:material-gmail:](mailto:mi.metwalli@gmail.com) 
 ## Introduction
