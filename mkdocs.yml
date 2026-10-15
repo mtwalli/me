@@ -1,43 +1,57 @@
 site_name: Mohamed Metwalli
+site_description: Principal Development Architect · Android Expert · Tech Leader
+site_url: https://mtwalli.github.io/me
+
 theme:
-  font:
-    text: Roboto
-    code: JetBrains Mono
   name: material
+  font:
+    text: Inter
+    code: JetBrains Mono
+  logo: material/feather
+  favicon: material/feather
   palette:
-    # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
       toggle:
         icon: material/brightness-auto
         name: Switch to light mode
-
-    # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      primary: white
-      accent: green
-      scheme: default 
+      primary: custom
+      accent: custom
+      scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
-
-    # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
-      primary: black
-      accent: green
+      primary: custom
+      accent: custom
       scheme: slate
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-  icon:
-   logo: material/feather
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.top
+    - navigation.footer
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+    - search.highlight
+    - search.suggest
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Career: career.md
 
 markdown_extensions:
   - attr_list
   - md_in_html
   - toc:
       permalink: true
-  - pymdownx.highlight
-  - pymdownx.superfences
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
@@ -46,33 +60,24 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji # (1)!
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - neoteroi.timeline
 
 plugins:
   - search
 
-features:
-  - content.action.edit
-  - content.action.view
-  - content.code.annotate
-  - content.code.copy
-  - content.tooltips
-  - navigation.footer
-  - navigation.indexes
-  - navigation.sections
-  - navigation.tracking
-  - search.highlight
-  - search.suggest
-  - toc.follow
-
 extra:
   social:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/metwalli
+      name: LinkedIn
     - icon: fontawesome/brands/github
       link: https://github.com/mtwalli
+      name: GitHub
+    - icon: material/email
+      link: mailto:mi.metwalli@gmail.com
+      name: Email
 
 extra_css:
   - stylesheets/extra.css
