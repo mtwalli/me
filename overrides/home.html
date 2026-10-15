@@ -1,0 +1,850 @@
+{% extends "main.html" %}
+
+{% block tabs %}
+{{ super() }}
+
+<style>
+/* ── TOKENS ─────────────────────────────────────────── */
+:root {
+  --p: #6366f1;
+  --p2: #818cf8;
+  --a: #06b6d4;
+  --a2: #22d3ee;
+  --dark-bg: #0f0f1a;
+  --dark-surface: rgba(255,255,255,.04);
+  --dark-border: rgba(255,255,255,.08);
+  --r: .875rem;
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+[data-md-color-scheme="default"] {
+  --bg: #fafafa;
+  --surface: #fff;
+  --border: rgba(99,102,241,.12);
+  --fg: #111827;
+  --muted: #6b7280;
+  --card-shadow: 0 4px 24px rgba(99,102,241,.09);
+}
+[data-md-color-scheme="slate"] {
+  --bg: #0f0f1a;
+  --surface: rgba(255,255,255,.04);
+  --border: rgba(255,255,255,.08);
+  --fg: #f3f4f6;
+  --muted: #9ca3af;
+  --card-shadow: 0 4px 32px rgba(0,0,0,.5);
+}
+
+/* ── RESET FOR HOME ──────────────────────────────────── */
+.home-page * { box-sizing: border-box; margin: 0; padding: 0; }
+.home-page a { text-decoration: none; }
+.home-page { background: var(--bg); color: var(--fg); font-family: 'Inter', system-ui, sans-serif; }
+
+/* ── HERO ────────────────────────────────────────────── */
+.h-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6rem 1.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated gradient orbs */
+.h-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  opacity: .55;
+}
+.h-orb-1 {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #6366f1 0%, transparent 70%);
+  top: -200px; left: 50%; transform: translateX(-50%);
+  animation: orb-float 8s ease-in-out infinite;
+}
+.h-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #06b6d4 0%, transparent 70%);
+  bottom: 0; right: -100px;
+  animation: orb-float 10s ease-in-out infinite reverse;
+}
+.h-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #a78bfa 0%, transparent 70%);
+  top: 30%; left: -80px;
+  animation: orb-float 12s ease-in-out infinite;
+}
+@keyframes orb-float {
+  0%,100% { transform: translateY(0) translateX(-50%); }
+  50%      { transform: translateY(-30px) translateX(-50%); }
+}
+.h-orb-2, .h-orb-3 { animation: orb-drift 10s ease-in-out infinite; }
+@keyframes orb-drift {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-20px); }
+}
+
+/* Avatar */
+.h-avatar-wrap {
+  position: relative;
+  width: 156px; height: 156px;
+  margin: 0 auto 2rem;
+  animation: fade-up .7s .1s var(--ease) both;
+}
+.h-avatar-ring {
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #6366f1, #06b6d4, #a78bfa, #6366f1);
+  animation: spin 5s linear infinite;
+  opacity: .9;
+}
+.h-avatar-ring::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--bg);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.h-avatar {
+  position: relative;
+  z-index: 2;
+  width: 156px; height: 156px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(99,102,241,.4);
+  box-shadow: 0 0 40px rgba(99,102,241,.3);
+  transition: transform .3s var(--ease);
+}
+.h-avatar:hover { transform: scale(1.05); }
+
+/* Text */
+.h-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  background: rgba(99,102,241,.1);
+  border: 1px solid rgba(99,102,241,.25);
+  border-radius: 100px;
+  padding: .3rem .9rem;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--p2);
+  margin-bottom: 1.25rem;
+  animation: fade-up .6s .25s var(--ease) both;
+}
+.h-badge-dot {
+  width: 6px; height: 6px;
+  background: var(--a);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .5; transform: scale(1.4); }
+}
+
+.h-name {
+  font-size: clamp(2.6rem, 6vw, 4.2rem);
+  font-weight: 900;
+  letter-spacing: -.035em;
+  line-height: 1.05;
+  background: linear-gradient(135deg, #818cf8 0%, #c084fc 45%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: .6rem;
+  animation: fade-up .6s .4s var(--ease) both;
+}
+
+.h-role {
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--muted);
+  margin-bottom: .5rem;
+  animation: fade-up .6s .5s var(--ease) both;
+}
+
+.h-location {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .875rem;
+  color: var(--muted);
+  margin-bottom: 2.25rem;
+  animation: fade-up .6s .6s var(--ease) both;
+}
+
+/* Buttons */
+.h-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  justify-content: center;
+  animation: fade-up .6s .75s var(--ease) both;
+}
+.h-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .7rem 1.5rem;
+  border-radius: 100px;
+  font-size: .875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+  white-space: nowrap;
+  color: inherit;
+}
+.h-btn:hover { transform: translateY(-3px); }
+.h-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #fff !important;
+  box-shadow: 0 4px 24px rgba(99,102,241,.4);
+}
+.h-btn-primary:hover { box-shadow: 0 8px 36px rgba(99,102,241,.55); }
+.h-btn-ghost {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--fg) !important;
+  backdrop-filter: blur(12px);
+}
+.h-btn-ghost:hover { background: rgba(99,102,241,.08); border-color: rgba(99,102,241,.3); }
+
+/* Stats row */
+.h-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 3rem;
+  animation: fade-up .6s .9s var(--ease) both;
+}
+.h-stat { text-align: center; }
+.h-stat-n {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--p2), var(--a2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.h-stat-l {
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-top: .25rem;
+}
+
+/* scroll chevron */
+.h-scroll {
+  position: absolute;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  font-size: .65rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: fade-up 1s 1.4s var(--ease) both;
+}
+.h-chevron {
+  width: 20px; height: 20px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: bounce 1.8s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: rotate(45deg) translateY(0); }
+  50%      { transform: rotate(45deg) translateY(5px); }
+}
+
+/* ── SECTION WRAPPER ─────────────────────────────────── */
+.h-section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+.h-section-sm { padding: 3rem 1.5rem; }
+
+.h-label {
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--a);
+  display: block;
+  text-align: center;
+  margin-bottom: .6rem;
+}
+.h-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, var(--p2), var(--a2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Divider */
+.h-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0 1.5rem;
+}
+
+/* ── ABOUT CARDS ─────────────────────────────────────── */
+.h-about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+.h-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  box-shadow: var(--card-shadow);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.h-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(99,102,241,.06), rgba(6,182,212,.04));
+  opacity: 0;
+  transition: opacity .25s var(--ease);
+}
+.h-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(99,102,241,.18); }
+.h-card:hover::before { opacity: 1; }
+.h-card-icon {
+  width: 48px; height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.1rem;
+  font-size: 1.4rem;
+}
+.h-card-icon.indigo { background: rgba(99,102,241,.12); }
+.h-card-icon.cyan   { background: rgba(6,182,212,.12); }
+.h-card-icon.violet { background: rgba(167,139,250,.12); }
+.h-card h3 { font-size: .975rem; font-weight: 700; margin-bottom: .6rem; color: var(--fg); }
+.h-card p  { font-size: .85rem; line-height: 1.7; color: var(--muted); }
+
+/* ── SKILLS ──────────────────────────────────────────── */
+.h-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.h-skill-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  transition: transform .22s var(--ease);
+}
+.h-skill-block:hover { transform: translateY(-3px); }
+.h-skill-heading {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--p2);
+  margin-bottom: 1rem;
+}
+.h-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.h-tag {
+  display: inline-block;
+  padding: .28rem .7rem;
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 500;
+  transition: transform .18s;
+  cursor: default;
+}
+.h-tag:hover { transform: scale(1.07); }
+.t-expert   { background: rgba(99,102,241,.14); color: #818cf8; border: 1px solid rgba(99,102,241,.25); }
+.t-adv      { background: rgba(6,182,212,.12); color: #22d3ee; border: 1px solid rgba(6,182,212,.22); }
+.t-mid      { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+
+/* ── TIMELINE ────────────────────────────────────────── */
+.h-timeline { position: relative; max-width: 640px; margin: 0 auto; }
+.h-timeline::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--p) 0%, var(--a) 100%);
+  opacity: .3;
+}
+.h-tl-item {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding-left: 4px;
+  animation: fade-up .5s var(--ease) both;
+}
+.h-tl-dot {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, var(--p), var(--a));
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px rgba(99,102,241,.3);
+  z-index: 1;
+  letter-spacing: 0;
+}
+.h-tl-body {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  flex: 1;
+  box-shadow: var(--card-shadow);
+  transition: transform .22s var(--ease);
+}
+.h-tl-body:hover { transform: translateX(4px); }
+.h-tl-company { font-size: 1rem; font-weight: 700; color: var(--p2); }
+.h-tl-role    { font-size: .875rem; color: var(--fg); margin-top: .15rem; }
+.h-tl-period  {
+  display: inline-block;
+  margin-top: .5rem;
+  font-size: .7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--a);
+  background: rgba(6,182,212,.1);
+  border: 1px solid rgba(6,182,212,.2);
+  border-radius: 100px;
+  padding: .15rem .6rem;
+}
+
+/* Region badge */
+.h-region {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  margin-left: 4px;
+}
+.h-region-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── CERTS ───────────────────────────────────────────── */
+.h-cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.h-cert {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+  box-shadow: var(--card-shadow);
+  transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+}
+.h-cert:hover { transform: translateY(-3px); box-shadow: 0 10px 36px rgba(99,102,241,.15); }
+.h-cert-icon {
+  flex-shrink: 0;
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(99,102,241,.14), rgba(6,182,212,.1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+.h-cert-issuer { font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--a); }
+.h-cert-name   { font-size: .82rem; font-weight: 600; color: var(--fg); margin-top: .2rem; line-height: 1.35; }
+
+/* ── FOOTER CTA ──────────────────────────────────────── */
+.h-cta {
+  text-align: center;
+  padding: 5rem 1.5rem 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.h-cta::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(99,102,241,.12), transparent 70%);
+  top: 0; left: 50%; transform: translateX(-50%);
+  pointer-events: none;
+}
+.h-cta-text {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  margin-bottom: .6rem;
+}
+.h-cta-sub {
+  font-size: .975rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+
+/* ── ANIMATIONS ──────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.h-anim { opacity: 0; }
+.h-anim.visible { animation: fade-up .55s var(--ease) both; }
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 600px) {
+  .h-hero { padding: 5rem 1rem 4rem; }
+  .h-stats { gap: 1.25rem; }
+  .h-stat-n { font-size: 1.5rem; }
+  .h-btns { flex-direction: column; align-items: center; }
+}
+</style>
+
+<div class="home-page">
+
+  <!-- ── HERO ── -->
+  <section class="h-hero">
+    <div class="h-orb h-orb-1"></div>
+    <div class="h-orb h-orb-2"></div>
+    <div class="h-orb h-orb-3"></div>
+
+    <div class="h-avatar-wrap">
+      <div class="h-avatar-ring"></div>
+      <img src="assets/image.jpg" class="h-avatar" alt="Mohamed Metwalli">
+    </div>
+
+    <div class="h-badge">
+      <span class="h-badge-dot"></span>
+      Available for exciting opportunities
+    </div>
+
+    <h1 class="h-name">Mohamed Metwalli</h1>
+    <p class="h-role">Principal Development Architect · Android Expert · Tech Leader</p>
+    <p class="h-location">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Heidelberg, Germany
+    </p>
+
+    <div class="h-btns">
+      <a href="mailto:mi.metwalli@gmail.com" class="h-btn h-btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Get in Touch
+      </a>
+      <a href="https://www.linkedin.com/in/metwalli" target="_blank" class="h-btn h-btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/mtwalli" target="_blank" class="h-btn h-btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <div class="h-stats">
+      <div class="h-stat">
+        <div class="h-stat-n">15+</div>
+        <div class="h-stat-l">Years Experience</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-n">4</div>
+        <div class="h-stat-l">Major Companies</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-n">∞</div>
+        <div class="h-stat-l">Lines of Code</div>
+      </div>
+    </div>
+
+    <div class="h-scroll">
+      <span>scroll</span>
+      <div class="h-chevron"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <div class="h-divider"></div>
+  <section class="h-section h-anim">
+    <span class="h-label">About Me</span>
+    <h2 class="h-title">Building the Future, One App at a Time</h2>
+    <div class="h-about-grid">
+      <div class="h-card h-anim">
+        <div class="h-card-icon indigo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>What I Do</h3>
+        <p>I architect mobile-first enterprise solutions at <strong style="color:#6366f1">SAP</strong>, bridging Android expertise with scalable system design. With 15+ years shipping to millions of users at SAP, E.ON, OSRAM, and Westwing.</p>
+      </div>
+      <div class="h-card h-anim">
+        <div class="h-card-icon cyan">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>How I Lead</h3>
+        <p>I mentor engineers, drive technical strategy, and foster ownership culture. From architecture reviews to onboarding — I make the team around me better, not just the codebase.</p>
+      </div>
+      <div class="h-card h-anim">
+        <div class="h-card-icon violet">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg>
+        </div>
+        <h3>What Drives Me</h3>
+        <p>The intersection of <strong style="color:#a78bfa">user experience and engineering excellence</strong>. Currently exploring AI-driven agentic workflows and enterprise-scale Android patterns at SAP.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ── -->
+  <div class="h-divider"></div>
+  <section class="h-section h-anim">
+    <span class="h-label">Expertise</span>
+    <h2 class="h-title">Skills &amp; Technologies</h2>
+    <div class="h-skills-grid">
+      <div class="h-skill-block h-anim">
+        <div class="h-skill-heading">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          Mobile Development
+        </div>
+        <div class="h-tags">
+          <span class="h-tag t-expert">Android SDK</span>
+          <span class="h-tag t-expert">Kotlin</span>
+          <span class="h-tag t-expert">Java</span>
+          <span class="h-tag t-adv">Jetpack Compose</span>
+          <span class="h-tag t-adv">MVVM / MVI</span>
+          <span class="h-tag t-adv">Firebase</span>
+          <span class="h-tag t-mid">Espresso Testing</span>
+        </div>
+      </div>
+      <div class="h-skill-block h-anim">
+        <div class="h-skill-heading">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Architecture
+        </div>
+        <div class="h-tags">
+          <span class="h-tag t-expert">Software Architecture</span>
+          <span class="h-tag t-expert">Clean Architecture</span>
+          <span class="h-tag t-adv">Microservices</span>
+          <span class="h-tag t-adv">REST APIs</span>
+          <span class="h-tag t-mid">AI / Agentic Workflows</span>
+        </div>
+      </div>
+      <div class="h-skill-block h-anim">
+        <div class="h-skill-heading">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Leadership
+        </div>
+        <div class="h-tags">
+          <span class="h-tag t-expert">Tech Leadership</span>
+          <span class="h-tag t-expert">Mentoring</span>
+          <span class="h-tag t-adv">Agile / Scrum</span>
+          <span class="h-tag t-adv">Cross-team Collab</span>
+        </div>
+      </div>
+      <div class="h-skill-block h-anim">
+        <div class="h-skill-heading">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Languages
+        </div>
+        <div class="h-tags">
+          <span class="h-tag t-expert">English</span>
+          <span class="h-tag t-expert">Arabic</span>
+          <span class="h-tag t-adv">German</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CAREER ── -->
+  <div class="h-divider"></div>
+  <section class="h-section h-anim">
+    <span class="h-label">Experience</span>
+    <h2 class="h-title">Career Journey</h2>
+
+    <div class="h-region">🇩🇪 Germany <span class="h-region-line"></span></div>
+    <div class="h-timeline">
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">SAP</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">SAP</div>
+          <div class="h-tl-role">Principal Development Architect</div>
+          <span class="h-tl-period">JAN 2023 – PRESENT</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">SAP</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">SAP</div>
+          <div class="h-tl-role">Development Architect</div>
+          <span class="h-tl-period">DEC 2020 – DEC 2022</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">E.ON</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">E.ON</div>
+          <div class="h-tl-role">Android Tech Lead</div>
+          <span class="h-tl-period">JUL 2019 – NOV 2020</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">Joyn</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">Joyn</div>
+          <div class="h-tl-role">Senior Android Developer</div>
+          <span class="h-tl-period">MAR 2019 – JUN 2019</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">OSR</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">OSRAM</div>
+          <div class="h-tl-role">Senior Android Developer</div>
+          <span class="h-tl-period">MAR 2018 – FEB 2019</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">WW</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">Westwing</div>
+          <div class="h-tl-role">Senior Android Developer</div>
+          <span class="h-tl-period">OCT 2014 – FEB 2018</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-region" style="margin-top:2.5rem">🇪🇬 Egypt <span class="h-region-line"></span></div>
+    <div class="h-timeline">
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">NTX</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">Nuitex</div>
+          <div class="h-tl-role">Senior Android Developer</div>
+          <span class="h-tl-period">JAN 2014 – SEP 2014</span>
+        </div>
+      </div>
+      <div class="h-tl-item h-anim">
+        <div class="h-tl-dot">ASG</div>
+        <div class="h-tl-body">
+          <div class="h-tl-company">Asgatech</div>
+          <div class="h-tl-role">Android Developer</div>
+          <span class="h-tl-period">OCT 2011 – DEC 2014</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CERTIFICATIONS ── -->
+  <div class="h-divider"></div>
+  <section class="h-section h-anim">
+    <span class="h-label">Certifications</span>
+    <h2 class="h-title">Credentials</h2>
+    <div class="h-cert-grid">
+      <div class="h-cert h-anim">
+        <div class="h-cert-icon">☕</div>
+        <div>
+          <div class="h-cert-issuer">Oracle</div>
+          <div class="h-cert-name">OCP Java SE 6 Programmer</div>
+        </div>
+      </div>
+      <div class="h-cert h-anim">
+        <div class="h-cert-icon">📱</div>
+        <div>
+          <div class="h-cert-issuer">Oracle</div>
+          <div class="h-cert-name">OCP Java ME Mobile Developer</div>
+        </div>
+      </div>
+      <div class="h-cert h-anim">
+        <div class="h-cert-icon">🤖</div>
+        <div>
+          <div class="h-cert-issuer">Coursera</div>
+          <div class="h-cert-name">Programming Mobile Apps for Android</div>
+        </div>
+      </div>
+      <div class="h-cert h-anim">
+        <div class="h-cert-icon">🧪</div>
+        <div>
+          <div class="h-cert-issuer">LinkedIn Learning</div>
+          <div class="h-cert-name">Advanced Android Espresso Testing</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div class="h-divider"></div>
+  <section class="h-cta h-anim">
+    <p class="h-cta-text">Let's build something amazing together.</p>
+    <p class="h-cta-sub">Open to collaborations, speaking invitations, and exciting projects.</p>
+    <div class="h-btns" style="justify-content:center">
+      <a href="mailto:mi.metwalli@gmail.com" class="h-btn h-btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        Say Hello
+      </a>
+      <a href="https://www.linkedin.com/in/metwalli" target="_blank" class="h-btn h-btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        Connect on LinkedIn
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function() {
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.h-anim').forEach(function(el) { io.observe(el); });
+})();
+</script>
+
+{% endblock %}
+
+{% block content %}{% endblock %}
+{% block footer %}{{ super() }}{% endblock %}

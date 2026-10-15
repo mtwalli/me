@@ -4,6 +4,7 @@ site_url: https://mtwalli.github.io/me
 
 theme:
   name: material
+  custom_dir: overrides
   font:
     text: Inter
     code: JetBrains Mono
